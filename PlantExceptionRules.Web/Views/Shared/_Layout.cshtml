@@ -1,0 +1,33 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlantExceptionRules</title>
+    @Styles.Render("~/Content/css")
+    @*<script>
+        var Api = '@GetApi()';
+    </script>*@
+</head>
+<body class="fuelux">
+  
+    <div id="wrapper">        
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="panel panel-primary">
+                @RenderBody()
+            </div>
+        </div>
+       @* <input type="hidden" name="hdnToken" id="hdnToken" value="@GetToken()" />*@
+        <!-- /#page-content-wrapper -->
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/Utilities")
+    @Scripts.Render("~/bundles/GridUtil")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+
