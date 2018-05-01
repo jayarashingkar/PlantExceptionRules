@@ -87,6 +87,7 @@ function customColumnRenderer(helpers, callback) {
     switch (column) {
         case 'ExceptionID':
             // let's combine name and description into a single column
+            //debugger;
             customMarkup = '<div style="font-size:12px;">' + rowData.ExceptionID + '</div>';
             break;       
         default:
@@ -112,7 +113,7 @@ function customRowRenderer(helpers, callback) {
 // the API handles filtering, sorting, searching, etc.
 function customDataSource(options, callback) {
     // set options   
-    //debugger;
+  //  debugger;
     var pageIndex = options.pageIndex;
     var pageSize = options.pageSize;
     var search = '';
@@ -149,35 +150,41 @@ function customDataSource(options, callback) {
     })
        
         .done(function (data) {          
-           if (data) {
-               var items = data.items;
-               var totalItems = data.total;
-               var totalPages = Math.ceil(totalItems / pageSize);
-               var startIndex = (pageIndex * pageSize) + 1;
-               var endIndex = (startIndex + pageSize) - 1;
+            if (data) {
+               
+                if (data.total != 0) {
+                    var items = data.items;
+                    var totalItems = data.total;
+                    var totalPages = Math.ceil(totalItems / pageSize);
+                    var startIndex = (pageIndex * pageSize) + 1;
+                    var endIndex = (startIndex + pageSize) - 1;
 
-               if (items) {
-                   if (endIndex > items.length) {
-                       endIndex = items.length;
-                   }
-               }
-               // configure datasource
-               var dataSource = {
-                   page: pageIndex,
-                   pages: totalPages,
-                   count: totalItems,
-                   start: startIndex,
-                   end: endIndex,
-                   columns: columns,
-                   items: items
-               };
+                    if (items) {
+                        if (endIndex > items.length) {
+                            endIndex = items.length;
+                        }
+                    }
+                    // configure datasource
+                    var dataSource = {
+                        page: pageIndex,
+                        pages: totalPages,
+                        count: totalItems,
+                        start: startIndex,
+                        end: endIndex,
+                        columns: columns,
+                        items: items
+                    };
 
-               // invoke callback to render repeater
-               callback(dataSource);
-           }
-           else {
-               alert("no data ");
-           }
+                    // invoke callback to render repeater
+                    callback(dataSource);
+                }
+                else {
+                   // debugger;
+                    var message = data.Message;
+                    alert(message);
+                  //  alert("no data ");
+                }
+           }           
        });
 }
 
@@ -200,7 +207,7 @@ $('#btnClear').on('click', function () {
 });
 
 $(document).ready(function () {
-    //debugger;
+ //   debugger;
     $('#Spec').val('');
     $('#Alloy').val('');
     $('#Temper').val('');

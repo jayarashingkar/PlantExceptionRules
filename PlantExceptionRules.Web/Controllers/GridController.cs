@@ -30,8 +30,6 @@ namespace PlantExceptionRules.Web.Controllers
             {
                throw ex;
             }
-
-
         }
     }
 }
