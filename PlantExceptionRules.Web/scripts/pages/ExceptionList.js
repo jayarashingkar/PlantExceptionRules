@@ -180,14 +180,11 @@ function customDataSource(options, callback) {
                 else {
                    // debugger;
                     var message = data.Message;
-                    bootbox.alert('message');
-              
+                    bootbox.alert('message');              
                 }
             }
-            else {
-               
-                bootbox.alert("no data");
-              
+            else {               
+                bootbox.alert("no data");              
             }
        });
 }
