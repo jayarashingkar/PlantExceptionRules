@@ -25,27 +25,7 @@ namespace PlantExceptionRules.Web.Controllers
         public ActionResult ExceptionList()
         {
             return View();
-        }
-
-        //public ActionResult DeviationListUpdate(int RecId, char status = '2')
-        //{
-        //    ResultViewModel result = new ResultViewModel();
-        //    //  bool isSuccess = false;
-
-        //    try
-        //    {
-        //        //status = '3' : Accept on Deviation
-        //        //status = '0' : Reject on Deviation
-        //        result = new VistaParser().AcceptOrReject(status, RecId);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.Message = ex.Message;
-        //    }
-
-        //    return Json(new { isSuccess = result.Success, message = result.Message }, JsonRequestBehavior.AllowGet);
-        //}
-
+        }     
         #endregion
     }
 }

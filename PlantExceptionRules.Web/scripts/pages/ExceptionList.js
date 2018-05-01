@@ -104,7 +104,8 @@ function customColumnRenderer(helpers, callback) {
 function customRowRenderer(helpers, callback) {
     // let's get the id and add it to the "tr" DOM element
     var item = helpers.item;
-    item.attr('id', 'row' + helpers.rowData.RecId);
+    //  item.attr('id', 'row' + helpers.rowData.RecId);
+    item.attr('id', 'row' + helpers.rowData.ExceptionID);
 
     callback();
 }
@@ -147,11 +148,9 @@ function customDataSource(options, callback) {
         type: 'post',
         url: '../Grid/GetExceptionList',
         data: options
-    })
-       
+    })       
         .done(function (data) {          
-            if (data) {
-               
+            if (data) {               
                 if (data.total != 0) {
                     var items = data.items;
                     var totalItems = data.total;
@@ -181,10 +180,15 @@ function customDataSource(options, callback) {
                 else {
                    // debugger;
                     var message = data.Message;
-                    alert(message);
-                  //  alert("no data ");
+                    bootbox.alert('message');
+              
                 }
-           }           
+            }
+            else {
+               
+                bootbox.alert("no data");
+              
+            }
        });
 }
 
