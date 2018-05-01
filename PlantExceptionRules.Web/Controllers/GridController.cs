@@ -21,15 +21,18 @@ namespace PlantExceptionRules.Web.Controllers
         public ActionResult GetExceptionList(DataGridoption option)
         {
           DataSearch<ProdExceptions> ds = new DataSearch<ProdExceptions>();
-           try
+            try
             {
                 ds = new ExceptionsData().GetList(option);
-              return Json(ds, JsonRequestBehavior.AllowGet);
+                //return Json(ds, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-               throw ex;
+                ds.Message = ex.Message.ToString();
+                //throw ex;
             }
+
+            return Json(ds, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace PlantExceptionRules.Data
     {
         public DataSearch<ProdExceptions> GetList(DataGridoption option)
         {
-            string message = "success";
+            //string message = "success";
             List<ProdExceptions> lstExceptions = new List<ProdExceptions>();
            
                 StoredProcedureName = "PlantExceptionRulesGetExceptionsList";
@@ -30,8 +30,8 @@ namespace PlantExceptionRules.Data
                 AddSearchFilter(option, SQLParameters);
 
             ProdExceptions exception = null;
-            try
-            {
+            //try
+            //{
                 DataTable result = Execute();
 
                int j;
@@ -58,16 +58,16 @@ namespace PlantExceptionRules.Data
 
                     lstExceptions.Add(exception);
                 }
-            }
-            catch (Exception ex)
-            {
-                message = ex.ToString();
-                lstExceptions[0].Total = 0;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    message = ex.ToString();
+            //    lstExceptions[0].Total = 0;
+            //}
 
             DataSearch<ProdExceptions> ds = new DataSearch<ProdExceptions>
             {
-                Message = message,
+              //  Message = message,
                 items = lstExceptions,
                 total = (lstExceptions != null && lstExceptions.Count > 0) ? lstExceptions[0].Total : 0
             };
