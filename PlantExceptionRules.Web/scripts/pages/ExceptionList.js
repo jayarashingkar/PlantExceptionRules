@@ -4,7 +4,7 @@ var columns = [
          label: 'ExceptionID',
          property: 'ExceptionID',
          sortable: true,
-         width: '40px'
+         width: '40px' 
      },
     {
         label: 'Spec',
