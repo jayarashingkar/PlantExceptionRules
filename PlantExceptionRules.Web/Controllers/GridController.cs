@@ -23,12 +23,14 @@ namespace PlantExceptionRules.Web.Controllers
           DataSearch<ProdExceptions> ds = new DataSearch<ProdExceptions>();
             try
             {
-                ds = new ExceptionsData().GetList(option);
+                 ds = new ExceptionsData().GetList(option);
+               
                 //return Json(ds, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 ds.Message = ex.Message.ToString();
+                ds.total = 0;
                 //throw ex;
             }
 
