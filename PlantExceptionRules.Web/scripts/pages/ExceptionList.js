@@ -208,7 +208,8 @@ $('#btnClear').on('click', function () {
 });
 
 $(document).ready(function () {
- //   debugger;
+    //   debugger;
+    $('.selectpicker').selectpicker();
     $('#Spec').val('');
     $('#Alloy').val('');
     $('#Temper').val('');
