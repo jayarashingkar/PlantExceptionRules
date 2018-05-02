@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,11 +14,12 @@ namespace PlantExceptionRules.Web.Controllers
     public class GridController : Controller
     {
         // GET: Grid
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+        
+   
         public ActionResult GetExceptionList(DataGridoption option)
         {
           DataSearch<ProdExceptions> ds = new DataSearch<ProdExceptions>();
@@ -34,7 +36,8 @@ namespace PlantExceptionRules.Web.Controllers
                 //throw ex;
             }
 
-            return Json(ds, JsonRequestBehavior.AllowGet);
+            // return Json(ds, JsonRequestBehavior.AllowGet);
+            return Json(new { items = ds.items, total = ds.total }, JsonRequestBehavior.AllowGet);
         }
     }
 }
