@@ -180,7 +180,7 @@ function customDataSource(options, callback) {
                 else {
                    // debugger;
                     var message = data.Message;
-                    bootbox.alert('message');              
+                    bootbox.alert(message);              
                 }
             }
             else {               
