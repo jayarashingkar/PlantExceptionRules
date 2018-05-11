@@ -18,16 +18,18 @@ namespace PlantExceptionRules.Data
             //string message = "success";
             List<ProdExceptions> lstExceptions = new List<ProdExceptions>();
            
-                StoredProcedureName = "PlantExceptionRulesGetExceptionsList";
+            StoredProcedureName = "PlantExceptionRulesGetExceptionsList";
 
-                this.ConnectionString = ConfigurationManager.AppSettings["DBConnection"].ToString();
+            this.ConnectionString = ConfigurationManager.AppSettings["DBConnection"].ToString();
 
-                SQLParameters = new Dictionary<string, object>();
+            SQLParameters = new Dictionary<string, object>();
 
-                SQLParameters["CurrentPage"] = option.pageIndex;
-                SQLParameters["NoOfRecords"] = option.pageSize;
+            SQLParameters["CurrentPage"] = option.pageIndex;
+            SQLParameters["NoOfRecords"] = option.pageSize;
+            SQLParameters["sortBy"] = option.sortBy;
+            SQLParameters["sortDirection"] = option.sortDirection;
 
-                AddSearchFilter(option, SQLParameters);
+            AddSearchFilter(option, SQLParameters);
 
              //   ProdExceptions exception = null;
             DataTable result = Execute();
@@ -52,31 +54,14 @@ namespace PlantExceptionRules.Data
                 exception.Note = Convert.ToString(row[j]); j++;
                 exception.Approval = Convert.ToChar(row[j]); j++;
                 exception.Enabled = Convert.ToInt16(row[j]); j++;
-
+                if (exception.Enabled == 1)                
+                    exception.RuleTurnedOn = "Yes";   
+                else
+                    exception.RuleTurnedOn = "No";
+                exception.PlantDescription = Convert.ToString(row[j]); j++;
                 lstExceptions.Add(exception);
             }
-
-            //    exception = new ProdExceptions();
-
-            //    exception.Total = 1;
-            //    exception.ExceptionID = 123;
-            //    exception.Spec = "abcd";
-            //    exception.SpecRev = "abcd";
-            //exception.Alloy = "abcd";
-            //exception.Temper = "abcd";
-
-            //    exception.CustPart = "abcd";
-
-            //exception.Plant = 123;
-            //exception.Severity = 123;
-            //    exception.Note = "abcd";
-            //exception.Approval = 'A';
-            //exception.Enabled = 1;
-
-
-            // lstExceptions.Add(exception);
-
-
+                  
             DataSearch<ProdExceptions> ds = new DataSearch<ProdExceptions>
             {
               //  Message = message,
@@ -90,6 +75,7 @@ namespace PlantExceptionRules.Data
 
         private static void AddSearchFilter(DataGridoption option, Dictionary<string, object> SQLParameters)
         {
+            #region searchby
             if (option != null && !string.IsNullOrEmpty(option.searchBy))
             {
                 string[] searchSplit = option.searchBy.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
@@ -125,7 +111,9 @@ namespace PlantExceptionRules.Data
                     }
                 }
             }
-        }
+            #endregion
 
+        }
+   
     }
 }

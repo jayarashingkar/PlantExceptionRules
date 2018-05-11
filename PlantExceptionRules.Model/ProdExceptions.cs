@@ -18,10 +18,12 @@ namespace PlantExceptionRules.Model
         public string CustPart { get; set; }
         public decimal UACPart { get; set; }
         public int Plant { get; set; }
+        public string PlantDescription { get; set; }
         public int Severity { get; set; }
         public string Note { get; set; }
         public char Approval { get; set; }
         public int Enabled { get; set; }
+        public string RuleTurnedOn { get; set; } 
         public int Total { get; set; }
     }
 }

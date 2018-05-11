@@ -82,6 +82,7 @@ function LoadGrid(id) {
     var repeater = $('#' + id);
     repeater.repeater({
         list_selectable: false, // (single | multi)
+        list_columnSizing: true,
         list_noItemsHTML: 'No Records Found.',
 
         // override the column output via a custom renderer.

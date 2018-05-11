@@ -1,30 +1,34 @@
 ﻿// define the columns in your datasource
 var columns = [
      {
-         label: 'ExceptionID',
+         label: 'Rule',
          property: 'ExceptionID',
          sortable: true,
          width: '40px' 
      },
-    {
-        label: 'Spec',
-        property: 'Spec',
-        sortable: true,
-        width: '50px'
-    },
-    {
-        label: 'SpecRev',
-        property: 'SpecRev',
-        width: '30px'
-    },
+     {
+         label: 'Specifications',
+         property: 'Spec',
+         sortable: true,
+         width: '200px'
+     },
+      {
+          label: 'SpecRev',
+          property: 'SpecRev',
+          sortable: true,
+          width: '30px'
+      },
+    
     {
         label: 'Alloy',
         property: 'Alloy',
+        sortable: true,
         width: '50px'
     },
     {
         label: 'Temper',
         property: 'Temper',
+        sortable: true,
         width: '50px'
     },
     {
@@ -49,24 +53,30 @@ var columns = [
     },
     {
         label: 'Plant',
-        property: 'Plant',
+        property: 'PlantDescription',
+        sortable: true,
         width: '50px'
     },
-    {
-        label: 'Severity',
-        property: 'Severity',
-        width: '50px'
-    },
+    //{
+    //    label: 'Severity',
+    //    property: 'Severity',
+    //    width: '50px'
+    //},
     {
         label: 'Approval',
         property: 'Approval',
         width: '50px'
     },
-    {
-        label: 'Enabled',
-        property: 'Enabled',
-        width: '30px'
-    },
+     {
+         label: 'RuleTurnedOn',
+         property: 'Enabled',
+         width: '30px'
+     },
+    //{
+    //    label: 'Enabled',
+    //    property: 'Enabled',
+    //    width: '30px'
+    //},
     {
         label: 'Note',
         property: 'Note',
@@ -81,6 +91,9 @@ function customColumnRenderer(helpers, callback) {
     // get all the data for the entire row
     var rowData = helpers.rowData;
     var customMarkup = '';
+    //debugger;
+    list_columnSizing = true;
+    list_highlightSortedColumn = true;
 
     // only override the output for specific columns.
     // will default to output the text value of the row item
@@ -114,38 +127,44 @@ function customRowRenderer(helpers, callback) {
 // the API handles filtering, sorting, searching, etc.
 function customDataSource(options, callback) {
     // set options   
-  //  debugger;
+
     var pageIndex = options.pageIndex;
     var pageSize = options.pageSize;
-    var search = '';
+     var search = '';
    
+    $('#Spec').val('');
+    $('#Alloy').val('');
+    $('#Temper').val('');
+    $('#Plant').val('');
+
     if ($('#Spec').val())
         search += ';' + 'Spec:' + $('#Spec').val();
     if ($('#Alloy').val())
         search += ';' + 'Alloy:' + $('#Alloy').val();
     if ($('#Temper').val())
         search += ';' + 'Temper:' + $('#Temper').val();
-    if ($('#UACPart').val())
-        search += ';' + 'UACPart:' + $('#UACPart').val();
-    if ($('#CustPart').val())
-        search += ';' + 'CustPart:' + $('#CustPart').val();
+    //if ($('#UACPart').val())
+    //    search += ';' + 'UACPart:' + $('#UACPart').val();
+    //if ($('#CustPart').val())
+    //    search += ';' + 'CustPart:' + $('#CustPart').val();
     if ($('#Plant').val())
         search += ';' + 'Plant:' + $('#Plant').val();
-    if ($('#Severity').val())
-        search += ';' + 'Severity:' + $('#Severity').val();
-
+    //if ($('#Severity').val())
+    //    search += ';' + 'Severity:' + $('#Severity').val();
+  
     var options = {
       //  Screen: 'DeviationList',
         pageIndex: pageIndex,
-        pageSize: pageSize,
-        sortDirection: options.sortDirection,
-        sortBy: options.sortProperty,
+        pageSize: pageSize,      
+        sortBy: (typeof options.sortProperty != 'undefined') ? options.sortProperty : "",
+        sortDirection: (typeof options.sortDirection != 'undefined') ? options.sortDirection : "",
         filterBy: options.filter.value || '',
         searchBy: search || ''
     };
 
     $.ajax({
         type: 'post',
+      //  url: '../PlantExceptionRules/Grid/GetExceptionList',
         url: '../Grid/GetExceptionList',
         data: options
     })       
@@ -199,10 +218,10 @@ $('#btnClear').on('click', function () {
     $('#Spec').val('');
     $('#Alloy').val('');
     $('#Temper').val('');
-    $('#UACPart').val('');
-    $('#CustPart').val('');
     $('#Plant').val('');
-    $('#Severity').val('');
+    //$('#UACPart').val('');
+    //$('#CustPart').val('');
+    //$('#Severity').val('');
     $('#ExceptionRepeater').repeater('render');
     return false;
 });
@@ -213,8 +232,8 @@ $(document).ready(function () {
     $('#Spec').val('');
     $('#Alloy').val('');
     $('#Temper').val('');
-    $('#UACPart').val('');
-    $('#CustPart').val('');
     $('#Plant').val('');
-    $('#Severity').val('');
+    //$('#UACPart').val('');
+    //$('#CustPart').val(''); 
+    //$('#Severity').val('');
 });
