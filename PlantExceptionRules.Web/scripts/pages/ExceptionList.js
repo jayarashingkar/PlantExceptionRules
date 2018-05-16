@@ -91,7 +91,7 @@ function customColumnRenderer(helpers, callback) {
     // get all the data for the entire row
     var rowData = helpers.rowData;
     var customMarkup = '';
-    //debugger;
+ 
     list_columnSizing = true;
     list_highlightSortedColumn = true;
 
@@ -99,8 +99,7 @@ function customColumnRenderer(helpers, callback) {
     // will default to output the text value of the row item
     switch (column) {
         case 'ExceptionID':
-            // let's combine name and description into a single column
-            //debugger;
+            // let's combine name and description into a single column      
             customMarkup = '<div style="font-size:12px;">' + rowData.ExceptionID + '</div>';
             break;       
         default:
@@ -131,11 +130,7 @@ function customDataSource(options, callback) {
     var pageIndex = options.pageIndex;
     var pageSize = options.pageSize;
      var search = '';
-   
-    $('#Spec').val('');
-    $('#Alloy').val('');
-    $('#Temper').val('');
-    $('#Plant').val('');
+
 
     if ($('#Spec').val())
         search += ';' + 'Spec:' + $('#Spec').val();
@@ -143,17 +138,10 @@ function customDataSource(options, callback) {
         search += ';' + 'Alloy:' + $('#Alloy').val();
     if ($('#Temper').val())
         search += ';' + 'Temper:' + $('#Temper').val();
-    //if ($('#UACPart').val())
-    //    search += ';' + 'UACPart:' + $('#UACPart').val();
-    //if ($('#CustPart').val())
-    //    search += ';' + 'CustPart:' + $('#CustPart').val();
     if ($('#Plant').val())
         search += ';' + 'Plant:' + $('#Plant').val();
-    //if ($('#Severity').val())
-    //    search += ';' + 'Severity:' + $('#Severity').val();
-  
-    var options = {
-      //  Screen: 'DeviationList',
+
+    var dataoptions = {
         pageIndex: pageIndex,
         pageSize: pageSize,      
         sortBy: (typeof options.sortProperty != 'undefined') ? options.sortProperty : "",
@@ -164,9 +152,8 @@ function customDataSource(options, callback) {
 
     $.ajax({
         type: 'post',
-      //  url: '../PlantExceptionRules/Grid/GetExceptionList',
         url: '../Grid/GetExceptionList',
-        data: options
+        data: dataoptions
     })       
         .done(function (data) {          
             if (data) {               
@@ -205,7 +192,9 @@ function customDataSource(options, callback) {
             else {               
                 bootbox.alert("no data");              
             }
-       });
+        });
+
+
 }
 
 $('#btnSearch').on('click', function () {
@@ -236,4 +225,6 @@ $(document).ready(function () {
     //$('#UACPart').val('');
     //$('#CustPart').val(''); 
     //$('#Severity').val('');
+
+
 });

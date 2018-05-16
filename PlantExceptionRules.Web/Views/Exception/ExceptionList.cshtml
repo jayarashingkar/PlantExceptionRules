@@ -5,108 +5,120 @@
 
 <div class="panel-heading">Plant Exception Records</div>
 <div class="panel-body">
+    
+        <div id="searchDiv" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnBack" onclick="window.history.back();" class="btn btn-primary btn-sm pull-right"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+           @using (Html.BeginForm("ExportToExcel", "Exception", FormMethod.Post, new { enctype = "multipart/form-data" }))
+           {
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Spec" class="cols-sm-2 control-label">Specification</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                    <input type="text" value="" id="Spec" name="Spec" class="form-control" placeholder="Enter Spec" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Alloy" class="cols-sm-2 control-label">Alloy</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                    <input type="text" value="" id="Alloy" name="Alloy" class="form-control" placeholder="Enter Alloy" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Temper" class="cols-sm-2 control-label">Temper</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                    <input type="text" value="" id="Temper" name="Temper" class="form-control" placeholder="Enter Temper" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Plant" class="cols-sm-2 control-label">Plant</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                    <input type="text" value="" id="Plant" name="Plant" class="form-control" placeholder="Enter Plant" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="row">
+                 <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="UACPart" class="cols-sm-2 control-label">UACPart</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                <input type="text" value="" id="UACPart" name="UACPart" class="form-control" placeholder="Enter UACPart" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+                @*<div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="CustPart" class="cols-sm-2 control-label">CustPart</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                <input type="text" value="" id="CustPart" name="CustPart" class="form-control" placeholder="Enter CustPart" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <div id="searchDiv" class="container">
-       
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Spec" class="cols-sm-2 control-label">Specification</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            <input type="text" value="" id="Spec" name="Spec" class="form-control" placeholder="Enter Spec" />
+                @*<div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Severity" class="cols-sm-2 control-label">Severity</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                <input type="text" value="" id="Severity" name="Severity" class="form-control" placeholder="Enter Severity" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>   
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Alloy" class="cols-sm-2 control-label">Alloy</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            <input type="text" value="" id="Alloy" name="Alloy" class="form-control" placeholder="Enter Alloy" />
+            </div>*@
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="" class="cols-sm-2 control-label"></label>
+                            <div class="cols-sm-10">
+                                <button id="btnSearch" class="btn btn-primary btn-large" onclick="return false;"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                &nbsp;&nbsp;&nbsp;
+                                <button id="btnClear" class="btn btn-basic btn-large" onclick="return false;"><i class="fa fa-times" aria-hidden="true"></i> Clear</button>
+                                <div class="col-md-3 pull-right">
+                                    @*  <button id="btnExcelReport" class="btn btn-success btn-large"><i class="fa fa-list-alt" aria-hidden="true"></i>Export to Excel</button>*@
+                                    <button id="btnExport" value="Export"  type="submit" class="btn btn-success btn-large"><i class="fa fa-file-excel-o" aria-hidden="true"></i>Export</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>  
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Temper" class="cols-sm-2 control-label">Temper</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            <input type="text" value="" id="Temper" name="Temper" class="form-control" placeholder="Enter Temper" />
-                        </div>
-                    </div>
-                </div>
-            </div>    
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Plant" class="cols-sm-2 control-label">Plant</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            <input type="text" value="" id="Plant" name="Plant" class="form-control" placeholder="Enter Plant" />
-                        </div>
-                    </div>
-                </div>
-            </div>     
-        </div>
-        @*<div class="row">
-            
-           
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="UACPart" class="cols-sm-2 control-label">UACPart</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            <input type="text" value="" id="UACPart" name="UACPart" class="form-control" placeholder="Enter UACPart" />
-                        </div>
-                    </div>
-                </div>
-            </div>              
-        </div>*@
-        @*<div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="CustPart" class="cols-sm-2 control-label">CustPart</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            <input type="text" value="" id="CustPart" name="CustPart" class="form-control" placeholder="Enter CustPart" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
-            @*<div class="col-md-3">
-                <div class="form-group">
-                    <label for="Severity" class="cols-sm-2 control-label">Severity</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            <input type="text" value="" id="Severity" name="Severity" class="form-control" placeholder="Enter Severity" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="" class="cols-sm-2 control-label"></label>
-                    <div class="cols-sm-10">
-                        <button id="btnSearch" class="btn btn-primary btn-large" onclick="return false;"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button id="btnClear" class="btn btn-primary btn-large" onclick="return false;"><i class="fa fa-times" aria-hidden="true"></i> Clear</button>
-                    </div>
-                </div>
-            </div>
-        </div>      
+          }
     </div>
+
     @{Html.RenderPartial("_Repeater", "ExceptionRepeater");}
 </div>
 

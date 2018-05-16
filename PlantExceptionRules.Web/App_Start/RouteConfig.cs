@@ -17,7 +17,6 @@ namespace PlantExceptionRules.Web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Exception", action = "Index", id = UrlParameter.Optional }
-               // defaults: new { controller = "Exception", action = "GetExceptionsList", id = UrlParameter.Optional }
             );
         }
     }

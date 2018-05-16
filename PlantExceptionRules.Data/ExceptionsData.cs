@@ -15,56 +15,67 @@ namespace PlantExceptionRules.Data
     {
         public DataSearch<ProdExceptions> GetList(DataGridoption option)
         {
-            //string message = "success";
+            string message = "success";
             List<ProdExceptions> lstExceptions = new List<ProdExceptions>();
-           
-            StoredProcedureName = "PlantExceptionRulesGetExceptionsList";
-
-            this.ConnectionString = ConfigurationManager.AppSettings["DBConnection"].ToString();
-
-            SQLParameters = new Dictionary<string, object>();
-
-            SQLParameters["CurrentPage"] = option.pageIndex;
-            SQLParameters["NoOfRecords"] = option.pageSize;
-            SQLParameters["sortBy"] = option.sortBy;
-            SQLParameters["sortDirection"] = option.sortDirection;
-
-            AddSearchFilter(option, SQLParameters);
-
-             //   ProdExceptions exception = null;
-            DataTable result = Execute();
-
-            int j;
-            foreach (DataRow row in result.Rows)
+            try
             {
-                ProdExceptions exception = new ProdExceptions();
-                j = 0;
-                exception.Total = Convert.ToInt32(row[j]); j++;
-                exception.ExceptionID = Convert.ToInt32(row[j]); j++;
-                exception.Spec = Convert.ToString(row[j]); j++;
-                exception.SpecRev = Convert.ToString(row[j]); j++;
-                exception.Alloy = Convert.ToString(row[j]); j++;
-                exception.Temper = Convert.ToString(row[j]); j++;
-                exception.MinSecThick = Convert.ToDecimal(row[j]); j++;
-                exception.MaxSecThick = Convert.ToDecimal(row[j]); j++;
-                exception.CustPart = Convert.ToString(row[j]); j++;
-                exception.UACPart = Convert.ToDecimal(row[j]); j++;
-                exception.Plant = Convert.ToInt32(row[j]); j++;
-                exception.Severity = Convert.ToInt32(row[j]); j++;
-                exception.Note = Convert.ToString(row[j]); j++;
-                exception.Approval = Convert.ToChar(row[j]); j++;
-                exception.Enabled = Convert.ToInt16(row[j]); j++;
-                if (exception.Enabled == 1)                
-                    exception.RuleTurnedOn = "Yes";   
-                else
-                    exception.RuleTurnedOn = "No";
-                exception.PlantDescription = Convert.ToString(row[j]); j++;
-                lstExceptions.Add(exception);
+                StoredProcedureName = "PlantExceptionRulesGetExceptionsList";
+
+                this.ConnectionString = ConfigurationManager.AppSettings["DBConnection"].ToString();
+
+                SQLParameters = new Dictionary<string, object>();
+
+                SQLParameters["CurrentPage"] = option.pageIndex;
+                SQLParameters["NoOfRecords"] = option.pageSize;
+                SQLParameters["sortBy"] = option.sortBy;
+                SQLParameters["sortDirection"] = option.sortDirection;
+
+                AddSearchFilter(option, SQLParameters);
+
+                //   ProdExceptions exception = null;
+                DataTable result = Execute();
+
+                int j;
+                foreach (DataRow row in result.Rows)
+                {
+                    ProdExceptions exception = new ProdExceptions();
+                    j = 0;
+                    exception.Total = Convert.ToInt32(row[j]); j++;
+                    exception.ExceptionID = Convert.ToInt32(row[j]); j++;
+                    exception.Spec = Convert.ToString(row[j]); j++;
+                    exception.SpecRev = Convert.ToString(row[j]); j++;
+                    exception.Alloy = Convert.ToString(row[j]); j++;
+                    exception.Temper = Convert.ToString(row[j]); j++;
+                    exception.MinSecThick = Convert.ToDecimal(row[j]); j++;
+                    exception.MaxSecThick = Convert.ToDecimal(row[j]); j++;
+                    exception.CustPart = Convert.ToString(row[j]); j++;
+                    exception.UACPart = Convert.ToDecimal(row[j]); j++;
+                    exception.Plant = Convert.ToInt32(row[j]); j++;
+                    exception.Severity = Convert.ToInt32(row[j]); j++;
+                    exception.Note = Convert.ToString(row[j]); j++;
+                    exception.Approval = Convert.ToChar(row[j]); j++;
+                    exception.Enabled = Convert.ToInt16(row[j]); j++;
+                    if (exception.Enabled == 1)
+                        exception.RuleTurnedOn = "Yes";
+                    else
+                        exception.RuleTurnedOn = "No";
+                    exception.PlantDescription = Convert.ToString(row[j]); j++;
+                    lstExceptions.Add(exception);
+                }
+
+               
             }
-                  
+            
+            catch(Exception ex)
+            {
+                // throw ex;
+                message = ex.ToString();
+                lstExceptions[0].Total = 0;
+            }
+           
             DataSearch<ProdExceptions> ds = new DataSearch<ProdExceptions>
             {
-              //  Message = message,
+                Message = message,
                 items = lstExceptions,
                 total = (lstExceptions != null && lstExceptions.Count > 0) ? lstExceptions[0].Total : 0
             };
